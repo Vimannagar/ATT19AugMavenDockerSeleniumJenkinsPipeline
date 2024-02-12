@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Get the code from git') {
+        stage('Building the image') {
             steps {
                 bat "docker build -t=testcaseimage ."
             }
