@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Making infra up for execution') {
             steps {
-                bat "docker-compose up hub chrome firefox edge"
+                bat "docker-compose up hub chrome firefox"
             }
         }
 
