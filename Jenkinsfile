@@ -16,7 +16,7 @@ pipeline {
 
     stage('Running test cases') {
             steps {
-                bat "docker-compose up testcaseimage"
+                bat "docker-compose up cucumber-chrome-testcases"
             }
 
 post { 
