@@ -28,12 +28,6 @@ Automation Team - ATT19Aug''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER -
     }
 
         }
-stage('Making infra down') {
-            steps {
-                sh "docker-compose down"
-            }
-
-        }
 
     
     
