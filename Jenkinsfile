@@ -15,7 +15,7 @@ pipeline {
 
     post { 
         always { 
-            emailext attachLog: true, attachmentsPattern: 'chrometestreports/cucumber-reports/reports.html', body: '''Hi Team,
+            emailext attachLog: true, attachmentsPattern: 'target/cucumber-reports/reports.html', body: '''Hi Team,
 <p>Here is the detail of execution from Jenkins:<br>
 
 $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:<br>
