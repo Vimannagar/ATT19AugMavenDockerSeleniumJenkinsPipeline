@@ -28,7 +28,7 @@ public class DriverFactory {
 			capabilities = new FirefoxOptions();
 		}
 		
-		driver = new RemoteWebDriver(new URL("http://192.168.1.5:4444/wd/hub"), capabilities);
+		driver = new RemoteWebDriver(new URL("http://3.88.213.89:4444/wd/hub"), capabilities);
 		
 		return driver; 
 		
