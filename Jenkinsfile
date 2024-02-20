@@ -2,24 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('Building the image') {
+        stage('Starting Selenium grid') {
             steps {
-                bat "docker build -t=testcaseimage ."
+                sh "docker-compose up -d hub chrome firefox"
             }
         }
-        stage('Making infra up for execution') {
+        stage('Executing test cases') {
             steps {
-                bat "docker-compose up -d hub chrome firefox"
+                sh "mvn -Dmaven.test.failure.ignore=true test"
             }
-        }
+        
 
-
-    stage('Running test cases') {
-            steps {
-                bat "docker-compose up cucumber-chrome-testcases"
-            }
-
-post { 
+    post { 
         always { 
             emailext attachLog: true, attachmentsPattern: 'chrometestreports/cucumber-reports/reports.html', body: '''Hi Team,
 <p>Here is the detail of execution from Jenkins:<br>
@@ -29,9 +23,15 @@ $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:<br>
 Check console output at $BUILD_URL to view the results.<br>
 
 Thanks,<br>
-Automation Team - ATT19Aug''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS! - Execution on Chrome browser', to: 'attevening@gmail.com'
+Automation Team - ATT19Aug''', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS! - Execution on Chrome browser', to: 'jawalegourav@gmail.com'
         }
     }
+
+        }
+stage('Making infra down') {
+            steps {
+                sh "docker-compose down"
+            }
 
         }
 
